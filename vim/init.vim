@@ -13,6 +13,7 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+inoremap jk <ESC>
 
 set showmatch
 set hlsearch
