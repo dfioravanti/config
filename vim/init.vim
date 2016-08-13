@@ -61,6 +61,8 @@ call plug#begin('~/.vim/plugged')
     
   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
+  Plug 'nvie/vim-flake8'
+
   " Track the engine.
   Plug 'SirVer/ultisnips'
 
