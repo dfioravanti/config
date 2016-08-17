@@ -41,27 +41,35 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 call plug#begin('~/.vim/plugged')
 
-	Plug 'https://github.com/morhetz/gruvbox'
+    Plug 'https://github.com/morhetz/gruvbox'
 
-  Plug 'https://github.com/wincent/command-t/'
+    Plug 'https://github.com/wincent/command-t/'
 
-  Plug 'itchyny/lightline.vim'
+    Plug 'itchyny/lightline.vim'
   
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
-  Plug 'https://github.com/jiangmiao/auto-pairs'
+    Plug 'https://github.com/jiangmiao/auto-pairs'
 
-  Plug 'https://github.com/rhysd/vim-clang-format'
+    Plug 'https://github.com/rhysd/vim-clang-format'
 
-  Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'octol/vim-cpp-enhanced-highlight'
 
-  Plug 'https://github.com/tpope/vim-fugitive'
+    Plug 'https://github.com/tpope/vim-fugitive'
 
-  Plug 'https://github.com/scrooloose/syntastic'
-    
-  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+    Plug 'https://github.com/scrooloose/syntastic'
 
-  Plug 'nvie/vim-flake8'
+    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
+    Plug 'nvie/vim-flake8'
+
+    Plug 'ctrlpvim/ctrlp.vim'
+
+    Plug 'mattn/emmet-vim'
+
+    Plug 'Shutnik/jshint2.vim'
+
+    Plug 'skammer/vim-css-color'
 
   " Track the engine.
   Plug 'SirVer/ultisnips'
@@ -95,3 +103,6 @@ let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
