@@ -1,14 +1,19 @@
 
 set encoding=utf8
+set termencoding=utf-8
+set fileencoding=utf-8
 scriptencoding utf-8
 
-set t_Co=256
+" Or if you have Neovim >= 0.1.5
+if (has("termguicolors"))
+    set termguicolors
+endif
 
-syntax on
+syntax enable
 filetype plugin indent on
 set nocompatible
 set colorcolumn=80
-set relativenumber
+set relativenumber number
 set background=dark 
 
 noremap <Up> <NOP>
@@ -25,7 +30,7 @@ set hidden
 set history=100
 
 filetype indent on
-set nowrap
+set wrap linebreak nolist
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4 
@@ -44,6 +49,8 @@ call plug#begin('~/.vim/plugged')
 
     " Aesthetic
     Plug 'morhetz/gruvbox'
+    Plug 'shinchu/lightline-gruvbox.vim'
+    Plug 'Yggdroot/indentLine'
     Plug 'itchyny/lightline.vim'
 
     " Interface
@@ -72,12 +79,25 @@ call plug#begin('~/.vim/plugged')
     " LaTeX
     Plug 'lervag/vimtex'
 
-    " Misc
+    " Git
     Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+
+    "Misc
     Plug 'Shougo/vimproc.vim', {'do' : 'make'}
     Plug 'godlygeek/tabular'
     Plug 'scrooloose/nerdcommenter'
     Plug 'https://github.com/epeli/slimux'
+
+call plug#end()
+
+ let g:indentLine_char='│'
+
+colorscheme gruvbox
+
+"lightline configuration
+source ~/.vim/lightline.vim
+
 
 "Shortcut with leader"
 nnoremap <Leader>w :w<CR>
@@ -88,10 +108,6 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-
-call plug#end()
-colorscheme gruvbox
-
 map <Leader>n :NERDTreeToggle<CR>
 
 set spell spelllang=en_gb
@@ -119,43 +135,5 @@ noremap <Leader>r :CommandTFlush<CR>
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent fileformat=unix
 autocmd! BufWritePost * Neomake
 
-"let g:ycm_confirm_extra_conf = 0
-"let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'  
-
-
-" syntastic
-map <Leader>s :SyntasticToggleMode<CR>
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-"Ctrl - p
-map <silent> <Leader>t :CtrlP()<CR>
-noremap <leader>b<space> :CtrlPBuffer<cr>
-
-" Tabularize
-let g:haskell_tabular = 1
-
-vmap a= :Tabularize /=<CR>
-vmap a; :Tabularize /::<CR>
-vmap a- :Tabularize /-><CR>
-
-" supertab
-
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-let g:haskellmode_completion_ghc = 1
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-let g:SuperTabMappingForward = '<c-space>'
-let g:SuperTabMappingBackward = '<s-c-space>'
-
-
-" deoplete Clang
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so.1'
-let g:deoplete#sources#clang#clang_header =  '/usr/lib/clang/'
+"Plugin configuration
+source ~/.vim/plugin.vim
