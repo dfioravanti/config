@@ -54,14 +54,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'itchyny/lightline.vim'
 
     " Interface
-    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'scrooloose/nerdtree'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
 
     " General syntax
     Plug 'neomake/neomake'
 
     " Autocomplete/snippet
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/context_filetype.vim'
     Plug 'Shougo/neopairs.vim'
     Plug 'SirVer/ultisnips'
@@ -87,17 +88,17 @@ call plug#begin('~/.vim/plugged')
     Plug 'Shougo/vimproc.vim', {'do' : 'make'}
     Plug 'godlygeek/tabular'
     Plug 'scrooloose/nerdcommenter'
-    Plug 'https://github.com/epeli/slimux'
+    Plug 'karadaharu/slimux'
+"    Plug 'epeli/slimux'
 
 call plug#end()
 
- let g:indentLine_char='│'
+let g:indentLine_char='│'
 
 colorscheme gruvbox
 
 "lightline configuration
 source ~/.vim/lightline.vim
-
 
 "Shortcut with leader"
 nnoremap <Leader>w :w<CR>
@@ -109,22 +110,26 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 map <Leader>n :NERDTreeToggle<CR>
+map <C-c><C-c> :SlimuxREPLSendLine<CR>
+vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
+let g:slimux_python_ipython = 1 
+
+map <C-f> :Files<CR>
+map <C-b> :Buffers<CR>
+map <C-s> :Snippets<CR>
+map <C-l> :Locate 
 
 set spell spelllang=en_gb
 autocmd FileType plaintex,tex,latex syntax spell toplevel
 
 " Let <Tab> also do completion
-inoremap <silent><expr> <Leader>c
+inoremap <silent><expr> <C-Space>
 \ pumvisible() ? "\<C-n>" :
 \ deoplete#mappings#manual_complete()
+let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
 
 " Close the documentation window when completion is done
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
