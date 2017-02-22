@@ -62,7 +62,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'neomake/neomake'
 
     " Autocomplete/snippet
-   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/context_filetype.vim'
     Plug 'Shougo/neopairs.vim'
     Plug 'SirVer/ultisnips'
