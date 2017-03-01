@@ -12,7 +12,6 @@ endif
 syntax enable
 filetype plugin indent on
 set nocompatible
-set colorcolumn=80
 set relativenumber number
 set background=dark 
 
