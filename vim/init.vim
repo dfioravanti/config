@@ -12,7 +12,7 @@ endif
 syntax enable
 filetype plugin indent on
 set nocompatible
-set relativenumber number
+set number
 set background=dark 
 
 noremap <Up> <NOP>
@@ -24,7 +24,6 @@ inoremap jk <ESC>
 
 set showmatch
 set hlsearch
-
 set hidden
 set history=100
 
