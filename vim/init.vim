@@ -24,7 +24,6 @@ inoremap jk <ESC>
 
 set showmatch
 set hlsearch
-
 set hidden
 set history=100
 
