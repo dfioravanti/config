@@ -12,7 +12,7 @@ endif
 syntax enable
 filetype plugin indent on
 set nocompatible
-set relativenumber number
+set number
 set background=dark 
 
 noremap <Up> <NOP>
