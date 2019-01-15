@@ -24,7 +24,6 @@ inoremap jk <ESC>
 
 set showmatch
 set hlsearch
-
 set hidden
 set history=100
 
@@ -67,15 +66,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
 
-    " C/C++
-    Plug 'rhysd/vim-clang-format'
-    Plug 'octol/vim-cpp-enhanced-highlight'
-    Plug 'zchee/deoplete-clang'
-
-    " Python
-    Plug 'nvie/vim-flake8'
-    Plug 'zchee/deoplete-jedi'
-
     " LaTeX
     Plug 'lervag/vimtex'
 
@@ -88,7 +78,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'godlygeek/tabular'
     Plug 'scrooloose/nerdcommenter'
     Plug 'karadaharu/slimux'
-"    Plug 'epeli/slimux'
 
 call plug#end()
 
