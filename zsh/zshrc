@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/diego/.oh-my-zsh
+export ZSH=/home/dfioravanti/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -89,6 +89,8 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=nvim
 
-export PATH="/home/diego/anaconda3/bin:$PATH"
-alias python=python2
-alias python3=/usr/bin/python3
+alias vim=nvim
+
+export PATH=/home/dfioravanti/anaconda3/bin:${PATH}
+alias python=/usr/bin/python
+alias python2=/usr/bin/python2

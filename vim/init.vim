@@ -10,10 +10,12 @@ if (has("termguicolors"))
 endif
 
 syntax enable
-filetype plugin indent on
+filetype plugin indent off
 set nocompatible
-set number
+set relativenumber
 set background=dark 
+
+set textwidth=79
 
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -42,42 +44,44 @@ let mapleader = ","
 
 " Ability to cancel a search with Escape
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
-
 call plug#begin('~/.vim/plugged')
 
-    " Aesthetic
-    Plug 'morhetz/gruvbox'
-    Plug 'shinchu/lightline-gruvbox.vim'
-    Plug 'Yggdroot/indentLine'
-    Plug 'itchyny/lightline.vim'
+" Aesthetic
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/vim-easy-align'
 
-    " Interface
-    Plug 'scrooloose/nerdtree'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
+" Interface
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-    " General syntax
-    Plug 'neomake/neomake'
+" General syntax
+Plug 'sbdchd/neoformat'
 
-    " Autocomplete/snippet
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/context_filetype.vim'
-    Plug 'Shougo/neopairs.vim'
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
+" Autocomplete/snippet
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'Shougo/echodoc.vim'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-match-highlight'
 
-    " LaTeX
-    Plug 'lervag/vimtex'
+" LaTeX
+Plug 'lervag/vimtex'
 
-    " Git
-    Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter'
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-    "Misc
-    Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-    Plug 'godlygeek/tabular'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'karadaharu/slimux'
+"Misc
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'godlygeek/tabular'
+Plug 'scrooloose/nerdcommenter'
+Plug 'karadaharu/slimux'
+Plug 'ervandew/supertab'
 
 call plug#end()
 
@@ -89,8 +93,7 @@ colorscheme gruvbox
 source ~/.vim/lightline.vim
 
 "Shortcut with leader"
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>w :w<cr>
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
@@ -102,19 +105,15 @@ map <C-c><C-c> :SlimuxREPLSendLine<CR>
 vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
 let g:slimux_python_ipython = 1 
 
-map <C-f> :Files<CR>
-map <C-b> :Buffers<CR>
-map <C-s> :Snippets<CR>
-map <C-l> :Locate 
+" fzf
+
+nnoremap <C-f> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-s> :Snippets<CR>
+nnoremap <C-l> :Lines<CR>
 
 set spell spelllang=en_gb
 autocmd FileType plaintex,tex,latex syntax spell toplevel
-
-" Let <Tab> also do completion
-inoremap <silent><expr> <C-Space>
-\ pumvisible() ? "\<C-n>" :
-\ deoplete#mappings#manual_complete()
-let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
 
 " Close the documentation window when completion is done
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -123,10 +122,45 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:UltiSnipsEditSplit="vertical"
 
 set wildignore+=*.log,*.sql,*.cache
-noremap <Leader>r :CommandTFlush<CR>
 
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent fileformat=unix
-autocmd! BufWritePost * Neomake
+
+" Required for operations modifying multiple buffers like rename.
+"set hidden
+
+"let g:LanguageClient_serverCommands.python = ['pyls']
+
+" Map renaming in python
+"autocmd FileType python nnoremap <buffer>
+" \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+
+" Automatically start language servers.
+"let g:LanguageClient_autoStart = 1
+
+"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 "Plugin configuration
 source ~/.vim/plugin.vim
+
+au BufEnter * call ncm2#enable_for_buffer()
+au User Ncm2Plugin call ncm2#register_source({
+            \ 'name' : 'vimtex',
+            \ 'priority': 1,
+            \ 'subscope_enable': 1,
+            \ 'complete_length': 1,
+            \ 'scope': ['tex'],
+            \ 'matcher': {'name': 'combine',
+            \           'matchers': [
+            \               {'name': 'abbrfuzzy', 'key': 'menu'},
+            \               {'name': 'prefix', 'key': 'word'},
+            \           ]},
+            \ 'mark': 'tex',
+            \ 'word_pattern': '\w+',
+            \ 'complete_pattern': g:vimtex#re#ncm,
+            \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+            \ })
+set completeopt=noinsert,menuone,noselect
+
+set noshowmode
