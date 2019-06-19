@@ -1,4 +1,3 @@
-
 set encoding=utf8
 set termencoding=utf-8
 set fileencoding=utf-8
@@ -9,8 +8,9 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
-syntax enable
-filetype plugin indent off
+filetype plugin on
+filetype plugin indent on
+syntax on
 set nocompatible
 set relativenumber
 set background=dark 
@@ -29,6 +29,19 @@ set hlsearch
 set hidden
 set history=100
 
+" Time between stop typing and calling plugins
+set updatetime=300
+
+" Better display for messages
+set cmdheight=2
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Python style indenting 
 filetype indent on
 set wrap linebreak nolist
 set tabstop=4
@@ -61,13 +74,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'sbdchd/neoformat'
 
 " Autocomplete/snippet
-Plug 'SirVer/ultisnips'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'honza/vim-snippets'
-Plug 'Shougo/echodoc.vim'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-match-highlight'
 
 " LaTeX
 Plug 'lervag/vimtex'
@@ -81,16 +89,12 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'karadaharu/slimux'
-Plug 'ervandew/supertab'
 
 call plug#end()
 
 let g:indentLine_char='│'
 
 colorscheme gruvbox
-
-"lightline configuration
-source ~/.vim/lightline.vim
 
 "Shortcut with leader"
 nnoremap <Leader>w :w<cr>
@@ -109,58 +113,22 @@ let g:slimux_python_ipython = 1
 
 nnoremap <C-f> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
-nnoremap <C-s> :Snippets<CR>
+" nnoremap <C-s> :Snippets<CR>
 nnoremap <C-l> :Lines<CR>
 
 set spell spelllang=en_gb
 autocmd FileType plaintex,tex,latex syntax spell toplevel
 
-" Close the documentation window when completion is done
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 set wildignore+=*.log,*.sql,*.cache
 
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent fileformat=unix
 
-" Required for operations modifying multiple buffers like rename.
-"set hidden
+"lightline configuration
+source ~/.vim/lightline.vim
 
-"let g:LanguageClient_serverCommands.python = ['pyls']
+"Coc configuration
+source ~/.vim/coc.vim
 
-" Map renaming in python
-"autocmd FileType python nnoremap <buffer>
-" \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
-
-" Automatically start language servers.
-"let g:LanguageClient_autoStart = 1
-
-"nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-"nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-"nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-"Plugin configuration
+"Other plugins configuration
 source ~/.vim/plugin.vim
-
-au BufEnter * call ncm2#enable_for_buffer()
-au User Ncm2Plugin call ncm2#register_source({
-            \ 'name' : 'vimtex',
-            \ 'priority': 1,
-            \ 'subscope_enable': 1,
-            \ 'complete_length': 1,
-            \ 'scope': ['tex'],
-            \ 'matcher': {'name': 'combine',
-            \           'matchers': [
-            \               {'name': 'abbrfuzzy', 'key': 'menu'},
-            \               {'name': 'prefix', 'key': 'word'},
-            \           ]},
-            \ 'mark': 'tex',
-            \ 'word_pattern': '\w+',
-            \ 'complete_pattern': g:vimtex#re#ncm,
-            \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-            \ })
-set completeopt=noinsert,menuone,noselect
-
-set noshowmode

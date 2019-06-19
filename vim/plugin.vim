@@ -1,19 +1,9 @@
-
 " Tabularize
 let g:haskell_tabular = 1
 
 vmap a= :Tabularize /=<CR>
 vmap a; :Tabularize /::<CR>
 vmap a- :Tabularize /-><CR>
-
-" supertab
-
-"let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-"let g:haskellmode_completion_ghc = 1
-"autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-"let g:SuperTabMappingForward = '<c-space>'
-"let g:SuperTabMappingBackward = '<s-c-space>'
-
 
 augroup my_cm_setup
     autocmd!
