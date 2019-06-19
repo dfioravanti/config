@@ -89,6 +89,8 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=nvim
 
+export PATH="/home/diego/anaconda3/bin:$PATH"
+alias python=python2
 alias vim=nvim
 
 export PATH=/home/dfioravanti/anaconda3/bin:${PATH}
