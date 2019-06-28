@@ -4,9 +4,9 @@ set fileencoding=utf-8
 scriptencoding utf-8
 
 " Or if you have Neovim >= 0.1.5
-if (has("termguicolors"))
-    set termguicolors
-endif
+"if (has("termguicolors"))
+"    set termguicolors
+"endif
 
 filetype plugin on
 filetype plugin indent on
@@ -94,7 +94,20 @@ call plug#end()
 
 let g:indentLine_char='│'
 
+"lightline configuration
+source ~/.vim/lightline.vim
+
+"Coc configuration
+source ~/.vim/coc.vim
+
+"Other plugins configuration
+source ~/.vim/plugin.vim
+
 colorscheme gruvbox
+hi clear SpellBad
+hi SpellBad cterm=underline
+set spell spelllang=en_gb
+autocmd FileType plaintex,tex,latex syntax spell toplevel
 
 "Shortcut with leader"
 nnoremap <Leader>w :w<cr>
@@ -116,19 +129,8 @@ nnoremap <C-b> :Buffers<CR>
 " nnoremap <C-s> :Snippets<CR>
 nnoremap <C-l> :Lines<CR>
 
-set spell spelllang=en_gb
-autocmd FileType plaintex,tex,latex syntax spell toplevel
-
-
 set wildignore+=*.log,*.sql,*.cache
 
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent fileformat=unix
 
-"lightline configuration
-source ~/.vim/lightline.vim
 
-"Coc configuration
-source ~/.vim/coc.vim
-
-"Other plugins configuration
-source ~/.vim/plugin.vim
