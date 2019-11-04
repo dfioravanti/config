@@ -1,21 +1,17 @@
+" Encoding
 set encoding=utf8
 set termencoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf-8
 
-" Or if you have Neovim >= 0.1.5
-"if (has("termguicolors"))
-"    set termguicolors
-"endif
-
-filetype plugin on
+" Sane defaults (most of these should be automatic in neovim)
 filetype plugin indent on
 syntax on
 set nocompatible
 set relativenumber
 set background=dark 
 
-set textwidth=79
+" General keys remapping
 
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -24,84 +20,75 @@ noremap <Right> <NOP>
 
 inoremap jk <ESC>
 
-set showmatch
-set hlsearch
-set hidden
-set history=100
-
-" Time between stop typing and calling plugins
-set updatetime=300
-
-" Better display for messages
-set cmdheight=2
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
-" Python style indenting 
-filetype indent on
-set wrap linebreak nolist
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4 
-set expandtab
-set smartindent
-set autoindent
-
-set laststatus=2
-
+" set leader
 let mapleader = ","
 
-" Ability to cancel a search with Escape
-nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
-call plug#begin('~/.vim/plugged')
+" Shortcut with leader
+nnoremap <leader>w :w<cr>
 
-" Aesthetic
-Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/vim-easy-align'
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
 
-" Interface
-Plug 'scrooloose/nerdtree'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Quick edit this file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+" Quick source this file
+vmap <silent> <leader>rv :so $MYVIMRC<CR>
 
-" General syntax
-Plug 'sbdchd/neoformat'
+" Colours
 
-" Autocomplete/snippet
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'honza/vim-snippets'
+if (has("termguicolors"))
+    set termguicolors
+endif
 
-" LaTeX
-Plug 'lervag/vimtex'
+"
+" General configuration
+"
 
-" Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+set textwidth=0 " Hard wrap at 80 characters 
+set showmatch " Jumps to matching parentesis
 
-"Misc
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'godlygeek/tabular'
-Plug 'scrooloose/nerdcommenter'
-Plug 'karadaharu/slimux'
+set hlsearch " Highlight all search pattern matches
+" Escape cancels a search
+nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR> 
 
-call plug#end()
+set hidden " Allows unwritten invisible buffers
+set history=100 " Set maximum number of entries accessible in the history
+set updatetime=300 " Time between stop typing and calling plugins
+set cmdheight=2 " Height of the messages area
+set shortmess+=c " don't give ins-completion-menu messages.
+set signcolumn=yes " always show signcolumns (needed to show +- in git)
 
-let g:indentLine_char='│'
+" Indentation python style for everything
 
-"lightline configuration
+set wrap " Enable soft wrapping
+set linebreak "break only at specific characters like space, etc 
+set nolist " Hide tabs and <CR> 
+set tabstop=4 " Tabs are 4 spaces
+set shiftwidth=4 " number of spaces to use for autoindenting
+set softtabstop=4 " when hitting <BS> pretend like a tab is removed
+set expandtab " expand tabs to spaces
+set autoindent " respect previous indent level
+set smartindent " respect previous indet level that makes sense while programming
+set breakindent " enable indentation for soft wrapped lines
+set showbreak=>> " append '>>' to softwrapped indent
+set laststatus=2 " Always show the status line in every window
+
+"
+" Plugins
+" 
+
+source ~/.vim/plugins.vim
+
+" General plugins configuration
+source ~/.vim/plugins_configuration.vim
+
+" Lightline configuration
 source ~/.vim/lightline.vim
 
-"Coc configuration
+" Coc configuration
 source ~/.vim/coc.vim
-
-"Other plugins configuration
-source ~/.vim/plugin.vim
 
 colorscheme gruvbox
 hi clear SpellBad
@@ -109,28 +96,8 @@ hi SpellBad cterm=underline
 set spell spelllang=en_gb
 autocmd FileType plaintex,tex,latex syntax spell toplevel
 
-"Shortcut with leader"
-nnoremap <Leader>w :w<cr>
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
 map <Leader>n :NERDTreeToggle<CR>
 map <C-c><C-c> :SlimuxREPLSendLine<CR>
 vmap <C-c><C-c> :SlimuxREPLSendSelection<CR>
 let g:slimux_python_ipython = 1 
-
-" fzf
-
-nnoremap <C-f> :Files<CR>
-nnoremap <C-b> :Buffers<CR>
-" nnoremap <C-s> :Snippets<CR>
-nnoremap <C-l> :Lines<CR>
-
-set wildignore+=*.log,*.sql,*.cache
-
-au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 expandtab autoindent fileformat=unix
-
 
