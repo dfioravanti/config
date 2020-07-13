@@ -8,7 +8,8 @@ export ZSH=/home/dfioravanti/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+# ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -87,11 +88,9 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export EDITOR=nvim
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 
-export PATH="/home/diego/anaconda3/bin:$PATH"
-alias python=python2
-alias vim=nvim
+export EDITOR=nvim
 
 export PATH=/home/dfioravanti/anaconda3/bin:${PATH}
 alias python=/usr/bin/python
