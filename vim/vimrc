@@ -1,1 +1,71 @@
-/home/dfioravanti/Documents/config/vim/init.vim
+" Encoding
+set encoding=utf8
+scriptencoding utf-8
+
+" Python3
+let g:python3_host_prog = expand('~/anaconda3/envs/neovim/bin/python')
+
+" Plugins
+call plug#begin('~/.local/share/neovim/plugged')
+
+    " Aesthetic
+    Plug 'lifepillar/vim-solarized8'
+    Plug 'shinchu/lightline-gruvbox.vim'
+    Plug 'itchyny/lightline.vim'
+
+    " Interface
+    Plug 'scrooloose/nerdtree'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+
+    " Snippets
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+    " LaTeX
+    Plug 'lervag/vimtex'
+
+    " Git
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+
+    " Markdown
+    Plug 'elzr/vim-json'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+    " tabular plugin is used to format tables
+    Plug 'godlygeek/tabular'
+
+    " Misc
+    Plug 'chrisbra/csv.vim'
+
+call plug#end()
+
+let g:vim_home = get(g:, 'vim_home', expand('~/.config/nvim/'))
+let config_list = [
+    \ 'configs.vim',
+    \ 'keymapping.vim',
+    \ 'plugins.vim',
+    \ 'lightline.vim',
+    \]
+for files in config_list
+  for f in glob(g:vim_home.files, 1, 1)
+    exec 'source' f
+  endfor
+endfor
+
+"
+" Colorscheme 
+" It has to go after the plugins because it is loaded as a plugin
+"
+
+colorscheme solarized8
+hi clear SpellBad
+hi SpellBad cterm=underline
+set spell
+set spelllang=en,cjk
+autocmd FileType plaintex,tex,latex syntax spell toplevel
+
