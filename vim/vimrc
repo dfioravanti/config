@@ -13,7 +13,7 @@ call plug#begin('~/.local/share/neovim/plugged')
     Plug 'shinchu/lightline-gruvbox.vim'
     Plug 'itchyny/lightline.vim'
 
-    " Interface
+   " Interface
     Plug 'scrooloose/nerdtree'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'

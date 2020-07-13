@@ -48,6 +48,12 @@ augroup END
 "
 let g:mkdp_auto_close = 0
 nnoremap <C-m> :MarkdownPreview<CR>
+" Tabularize
+let g:haskell_tabular = 1
+
+vmap a= :Tabularize /=<CR>
+vmap a; :Tabularize /::<CR>
+vmap a- :Tabularize /-><CR>
 
 "
 " vimtex
@@ -77,3 +83,4 @@ let g:vimtex_format_enabled = 1
 "
 
 map <Leader>n :NERDTreeToggle<CR>
+
