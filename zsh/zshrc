@@ -2,13 +2,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/dfioravanti/.oh-my-zsh"
+export ZSH="/home/diego/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="agnoster"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -108,15 +108,15 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 # added by Anaconda3 2018.12 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/dfioravanti/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/diego/.conda/bin/conda' shell.bash hook 2> /dev/null)"
 if [ $? -eq 0 ]; then
     \eval "$__conda_setup"
 else
-    if [ -f "/home/dfioravanti/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/dfioravanti/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/diego/.conda/etc/profile.d/conda.sh" ]; then
+# . "/home/diego/.conda/etc/profile.d/conda.sh"  # commented out by conda initialize
         CONDA_CHANGEPS1=false conda activate base
     else
-        \export PATH="/home/dfioravanti/anaconda3/bin:$PATH"
+        \export PATH="/home/diego/.conda/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -124,3 +124,19 @@ unset __conda_setup
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export LEDGER_FILE=~/Documents/finance/2020.journal
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/diego/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/diego/.conda/etc/profile.d/conda.sh" ]; then
+        . "/home/diego/.conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/diego/.conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
