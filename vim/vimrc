@@ -62,6 +62,7 @@ endfor
 " It has to go after the plugins because it is loaded as a plugin
 "
 
+set background=light
 colorscheme solarized8
 hi clear SpellBad
 hi SpellBad cterm=underline
